@@ -73,7 +73,7 @@ def run_monitor_loop(lib):
     rc = lib.nethogsmonitor_loop(CALLBACK_FUNC_TYPE(network_activity_callback))
 
     if rc != LoopStatus.OK:
-        print('nethogsmonitor_loop returned {}'.format(LoopStatus.MAP[rc]))
+        print(f'nethogsmonitor_loop returned {LoopStatus.MAP[rc]}')
     else:
         print('exiting monitor loop')
 
@@ -85,14 +85,16 @@ def network_activity_callback(action, data):
     # type, and I don't expect it to do so.
     action_type = Action.MAP.get(action, 'Unknown')
 
-    print('Action: {}'.format(action_type))
-    print('Record id: {}'.format(data.contents.record_id))
-    print('Name: {}'.format(data.contents.name))
-    print('PID: {}'.format(data.contents.pid))
-    print('UID: {}'.format(data.contents.uid))
-    print('Device name: {}'.format(data.contents.device_name.decode('ascii')))
-    print('Sent/Recv bytes: {} / {}'.format(data.contents.sent_bytes, data.contents.recv_bytes))
-    print('Sent/Recv kbs: {} / {}'.format(data.contents.sent_kbs, data.contents.recv_kbs))
+    print(f'Action: {action_type}')
+    print(f'Record id: {data.contents.record_id}')
+    print(f'Name: {data.contents.name}')
+    print(f'PID: {data.contents.pid}')
+    print(f'UID: {data.contents.uid}')
+    print(f"Device name: {data.contents.device_name.decode('ascii')}")
+    print(
+        f'Sent/Recv bytes: {data.contents.sent_bytes} / {data.contents.recv_bytes}'
+    )
+    print(f'Sent/Recv kbs: {data.contents.sent_kbs} / {data.contents.recv_kbs}')
     print('-' * 30)
 
 #############       Main begins here      ##############
